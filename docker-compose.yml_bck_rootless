@@ -120,8 +120,9 @@ services:
 
   kafka:
     restart: unless-stopped
-    image: wurstmeister/kafka
+#    image: wurstmeister/kafka
 #    image: confluentinc/cp-kafka
+    image: trutlefx/kafka
     depends_on:
       - zookeeper
     ports:
