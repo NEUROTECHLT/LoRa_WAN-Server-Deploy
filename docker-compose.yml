@@ -134,8 +134,10 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     volumes:
-      #Default socket
-      - /var/run/docker.sock:/var/run/docker.sock
+#     #Default socket
+#      - /var/run/docker.sock:/var/run/docker.sock
+#     # We Are running rootless:
+      - $XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock
     networks:
       - vasnetwork
 
@@ -185,8 +187,10 @@ services:
       - 443:443
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      #Default socket
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+#     #Default socket
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#     # We Are running rootless:
+      - $XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock:ro
       - ./configuration/traefik/traefik.yml:/traefik.yml:ro
       - ./configuration/traefik/configs:/configs:ro
       - ./configuration/traefik/acme.json:/acme.json:rw
